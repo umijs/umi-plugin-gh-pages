@@ -1,5 +1,8 @@
 # umi-plugin-gh-pages
 
+[![NPM version](https://img.shields.io/npm/v/umi-plugin-gh-pages.svg?style=flat)](https://npmjs.org/package/umi-plugin-gh-pages)
+[![NPM downloads](http://img.shields.io/npm/dm/umi-plugin-gh-pages.svg?style=flat)](https://npmjs.org/package/umi-plugin-gh-pages)
+
 umi plugin to publish to Github Pages.
 
 ## Usage
