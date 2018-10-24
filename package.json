@@ -1,0 +1,26 @@
+{
+  "name": "umi-plugin-gh-pages",
+  "version": "0.1.0",
+  "description": "umi plugin to publish to Github Pages.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umijs/umi-plugin-gh-pages"
+  },
+  "homepage": "https://github.com/umijs/umi-plugin-gh-pages",
+  "authors": [
+    "chencheng <sorrycc@gmail.com> (https://github.com/sorrycc)"
+  ],
+  "bugs": {
+    "url": "https://github.com/umijs/umi-plugin-gh-pages/issues"
+  },
+  "peerDependencies": {
+    "umi": "2.x"
+  },
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}
