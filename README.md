@@ -21,6 +21,10 @@ export default {
 
 Checkout https://github.com/tschaub/gh-pages#options
 
+## Deploy
+```
+umi build && umi gh-pages
+```
 ## Examples
 
 * https://github.com/sorrycc/test-gh-pages
