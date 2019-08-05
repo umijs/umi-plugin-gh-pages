@@ -7,9 +7,10 @@ module.exports = function (api, options) {
 
   function publish(args) {
     const ghpages = require('gh-pages');
+    const { dir, ...ghpagesArgs } = options;
     return new Promise((resolve, reject) => {
-      ghpages.publish(paths.outputPath, {
-        ...options,
+      ghpages.publish(dir || paths.outputPath, {
+        ...ghpagesArgs,
         ...args,
       }, (err) => {
         if (err) {
