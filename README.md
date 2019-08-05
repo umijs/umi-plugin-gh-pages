@@ -19,7 +19,7 @@ export default {
 
 ## Options
 
-Checkout https://github.com/tschaub/gh-pages#options
+exclude `dir` (default umi config `outputPath`), other options please checkout https://github.com/tschaub/gh-pages#options
 
 ## Examples
 
