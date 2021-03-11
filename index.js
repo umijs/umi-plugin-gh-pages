@@ -1,13 +1,21 @@
 
-module.exports = function (api, options) {
+module.exports = function (api) {
   const {
     log,
     paths,
+    userConfig
   } = api;
-
+  api.describe({
+    key: 'ghPages',
+    config: {
+      schema(joi) {
+        return joi.object();
+      },
+    },
+  });
   function publish(args) {
     const ghpages = require('gh-pages');
-    const { dir, ...ghpagesArgs } = options;
+    const { dir, ...ghpagesArgs } = userConfig.ghPages;
     return new Promise((resolve, reject) => {
       ghpages.publish(dir || paths.outputPath, {
         ...ghpagesArgs,
@@ -32,14 +40,4 @@ module.exports = function (api, options) {
       log.error(e);
     });
   });
-  
-  api.onBuildSuccess(() => {
-    // 创建一个 404 文件，因为 github pages 不支持单应用模式
-    fs.copyFileSync(
-      path.join(paths.outputPath, "index.html"),
-      path.join(paths.outputPath, "404.html")
-    );
-    api.log.success("create 404.html");
-  });
-  
 }
