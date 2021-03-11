@@ -11,13 +11,11 @@ Configure in `.umirc.js`,
 
 ```js
 export default {
-  plugins: [
-    ['umi-plugin-gh-pages', options],
-  ],
+  ghPages:{}
 }
 ```
 
-## Options
+## ghPages
 
 exclude `dir` (default umi config `outputPath`), other options please checkout https://github.com/tschaub/gh-pages#options
 
