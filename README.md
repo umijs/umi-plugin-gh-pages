@@ -13,7 +13,8 @@ Configure in `.umirc.js`,
 export default {
   ghPages:{
     dir:'dist',
-    useJsdelivr: false,
+    useCDN: false,
+    getCDNUrl:(gitInfo)=>{return 'url'}
     ...gh-pages#PublishOptions
   }
 }
@@ -21,11 +22,16 @@ export default {
 
 ## ghPages
 
+### dir
 exclude `dir` (default umi config `outputPath`), other options please checkout https://github.com/tschaub/gh-pages#options
 
-### useJsdelivr
+### useCDN
 
-A free CDN for Open Source - https://www.jsdelivr.com/
+use CDN in publicPath ,default use [jsdelivr](https://www.jsdelivr.com/) - A free CDN for Open Source.
+
+### getCDNUrl
+
+Custom CDN url.
 
 ### Deploy in GitHub pages
 
@@ -34,7 +40,7 @@ config/config.ts
 ```ts
 {
   ghPages: {
-    useJsdelivr: true,
+    useCDN: true,
   },
 }
 ```
@@ -46,7 +52,7 @@ umi build
 or
 
 ```bash
-$GH_PAGES_USE_JSDELIVR=true umi build
+$GH_PAGES_USE_CDN=true umi build
 ```
 
 ### Deploy in [vercel](https://vercel.com/) （now）
@@ -70,7 +76,7 @@ set the [environment variables](https://vercel.com/docs/environment-variables) i
 ```
 GH_TOKEN=[tokens]( 
 https://github.com/settings/tokens)
-GH_PAGES_USE_JSDELIVR=true
+GH_PAGES_USE_CDN=true
 ```
 
 run the command
