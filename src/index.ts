@@ -12,7 +12,7 @@ export default (api: IApi) => {
     paths,
     logger
   } = api;
-  const useCDN = api.userConfig.ghPages?.useCDN || process.env.GH_PAGES_USE_JSDELIVR === 'true';
+  const useCDN = api.userConfig.ghPages?.useCDN || process.env.GH_PAGES_USE_CDN === 'true';
   api.describe({
     key: 'ghPages',
     config: {
@@ -87,6 +87,7 @@ export default (api: IApi) => {
     if (useCDN) {
       const gitInfo = await getGitInfo();
       tag = gitInfo?.tag;
+      logger.info('git tag:', tag);
     }
     // @ts-ignore
     ghpages.publish(dir || paths.absOutputPath, {
@@ -96,7 +97,8 @@ export default (api: IApi) => {
       if (err) {
         logger.profile('publish');
         logger.error(err);
-        return;
+        // 如果发生错误，执行中断
+        process.exit(1);
       }
       logger.profile('publish');
       logger.info('Published to Github pages');
