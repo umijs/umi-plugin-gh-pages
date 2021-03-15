@@ -43,14 +43,14 @@ export default (api: IApi) => {
     const { version, repository } = api.pkg;
     if (!repository) {
       logger.error(`Please set the repository in package.json`);
-      return;
+      process.exit(1);
     }
     // git 要先提交
     const gitStatus = execa.sync('git', ['status', '--porcelain']).stdout;
     if (gitStatus.length) {
       logger.profile('publish');
       logger.error(`Your git status is not clean. Aborting.`);
-      return;
+      process.exit(1);
     }
     // {
     //   type: "github",
@@ -81,7 +81,7 @@ export default (api: IApi) => {
     if (!existsSync(paths.absOutputPath as any)) {
       logger.profile('publish');
       logger.error(`Please execute the command 'umi build' first`);
-      return;
+      process.exit(1);
     }
     let tag = ghpagesArgs.tag;
 
