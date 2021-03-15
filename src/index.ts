@@ -12,7 +12,6 @@ export default (api: IApi) => {
     paths,
     logger
   } = api;
-  const useCDN = api.userConfig.ghPages?.useCDN || process.env.GH_PAGES_USE_CDN === 'true';
   api.describe({
     key: 'ghPages',
     config: {
@@ -22,6 +21,8 @@ export default (api: IApi) => {
     },
   });
 
+  const useCDN = api.userConfig?.ghPages?.useCDN || process.env.GH_PAGES_USE_CDN === 'true';
+
   const defaultGetCDNUrl = (gitInfo: any) => {
     return `https://cdn.jsdelivr.net/gh/${gitInfo?.user}/${gitInfo?.project}@${gitInfo?.tag}/`
   }
@@ -29,7 +30,7 @@ export default (api: IApi) => {
   if (useCDN) {
     // 自动打 tag 的情况，默认修改 publicPath
     api.modifyDefaultConfig(async (memo) => {
-      const { getCDNUrl = defaultGetCDNUrl } = api.config.ghPages || {};
+      const { getCDNUrl = defaultGetCDNUrl } = api.config?.ghPages || {};
       const gitInfo = await getGitInfo();
       return {
         ...memo,
@@ -75,7 +76,7 @@ export default (api: IApi) => {
 
   const publish = async () => {
     logger.profile('publish');
-    const { dir, useCDN, getCDNUrl, ...ghpagesArgs } = api.config.ghPages || {};
+    const { dir, useCDN, getCDNUrl, ...ghpagesArgs } = api.config?.ghPages || {};
     // 要先执行 build
     if (!existsSync(paths.absOutputPath as any)) {
       logger.profile('publish');
