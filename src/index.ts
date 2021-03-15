@@ -76,7 +76,7 @@ export default (api: IApi) => {
 
   const publish = async () => {
     logger.profile('publish');
-    const { dir, useCDN, getCDNUrl, ...ghpagesArgs } = api.config?.ghPages || {};
+    const { dir, getCDNUrl, ...ghpagesArgs } = api.config?.ghPages || {};
     // 要先执行 build
     if (!existsSync(paths.absOutputPath as any)) {
       logger.profile('publish');
