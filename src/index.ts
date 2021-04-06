@@ -109,7 +109,7 @@ export default (api: IApi) => {
     name: 'gh-pages',
     description: 'Publish to Github pages',
     details: 'umi gh-pages [Options]',
-    fn: async ({ args }) => {
+    fn: ({ args }) => {
       publish();
     }
   });
