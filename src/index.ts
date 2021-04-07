@@ -2,7 +2,6 @@ import { IApi } from '@umijs/types';
 import { execa } from '@umijs/utils';
 import ghpages from 'gh-pages';
 import hostedGitInfo from 'hosted-git-info';
-import fetch from 'node-fetch';
 import semver from 'semver';
 import { existsSync, copyFileSync } from 'fs';
 import { join } from 'path';
@@ -52,14 +51,10 @@ export default (api: IApi) => {
       logger.error(`Your git status is not clean. Aborting.`);
       process.exit(1);
     }
-    // {
-    //   type: "github",
-    //   domain: "github.com",
-    //   user: "npm",
-    //   project: "hosted-git-info"
-    // }
+    // { type: "github", domain: "github.com", user: "npm", project: "hosted-git-info" }
     const gitInfo = hostedGitInfo.fromUrl(repository?.url || repository);
-    const data = await fetch(`https://api.github.com/repos/${gitInfo?.user}/${gitInfo?.project}/tags`).then(res => res.json());
+    const { body } = await api.utils.got.get(`https://api.github.com/repos/${gitInfo?.user}/${gitInfo?.project}/tags`);
+    const data = JSON.parse(body);
     const versions = data.sort(function (v1: any, v2: any) {
       return semver.compare(v2.name, v1.name);
     });
@@ -109,7 +104,7 @@ export default (api: IApi) => {
     name: 'gh-pages',
     description: 'Publish to Github pages',
     details: 'umi gh-pages [Options]',
-    fn: async ({ args }) => {
+    fn: ({ args }) => {
       publish();
     }
   });
