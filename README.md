@@ -94,3 +94,7 @@ $ umi build
 ## LICENSE
 
 MIT
+
+## Other
+
+[如何优雅的使用 CDN 优化博客](https://zhuanlan.zhihu.com/p/362871371)
